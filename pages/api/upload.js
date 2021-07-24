@@ -4,7 +4,7 @@ const multerS3 = require( 'multer-s3' );
 const multer = require('multer');
 const path = require( 'path' );
 const url = require('url');
-const keys = require("../config/keys");
+const keys = require("../../server/config/keys");
 
 /**
  * express.Router() creates modular, mountable route handlers
