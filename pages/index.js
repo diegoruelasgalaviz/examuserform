@@ -99,6 +99,9 @@ class Home extends React.Component{
                   foundsomething = true;
               this.handleNameWrite(doc.data().name);
           });
+          if(foundsomething == false){
+            Swal().fire("no se ha encontrado ningún usuario");
+          }
       })
       .catch((error) => {
           console.log("Error getting documents: ", error);
