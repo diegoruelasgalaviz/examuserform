@@ -58,10 +58,12 @@ class Home extends React.Component{
                 } else {
                     // Success
                     let fileName = response.data;
+                    {/*
                     this.setState({
                         pdfUrl: fileName.location
                     })
                     console.log( 'fileName', fileName.location );
+                    */}
                     // alert( 'File Uploaded', '#3089cf' );
                 }
             }
@@ -191,11 +193,7 @@ class Home extends React.Component{
         </div>
         <div >
           <h4>Pdf File uploader</h4>
-          <span>
-              
-              Click here or drop files to upload 
-          </span>
-
+          
           <input 
               type="file" 
               className="form-control-file"
