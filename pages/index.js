@@ -85,6 +85,7 @@ class Home extends React.Component{
       const getUser = db.collection("users").where("serial", "==", idholder)
       .get()
       .then((querySnapshot) => {
+        console.log("asd");
           querySnapshot.forEach((doc) => {
               // doc.data() is never undefined for query doc snapshots
                 console.log("asd");
@@ -100,7 +101,7 @@ class Home extends React.Component{
               this.handleNameWrite(doc.data().name);
           });
           if(foundsomething == false){
-            Swal().fire("no se ha encontrado ningún usuario");
+            Swal.fire("no se ha encontrado ningún usuario, prueba insertando un id como aa33");
           }
       })
       .catch((error) => {
@@ -123,26 +124,43 @@ class Home extends React.Component{
     if (amount) {
       Swal.fire(`Entered amount: ${amount}`);
       this.setState({orderamount: amount})
-      this.Submit();
-      Swal.fire(`Your order has been Submited`);
+      
+      
 
     }
    })();
   }
   
-  Submit(){
-    const db = firebase.firestore();
-    const dbOrderRef = db.collection('orders');
-    dbOrderRef.add(this.state).then(() => {
-        toast.success('Order has been created successfully.', {
-            position: "bottom-left",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true
+  Submit= () => {
+    
+    
+    if(this.state.name != ""){
+      if(this.state.orderamount != ""){
+        if(this.state.previewImage != ""){
+          const db = firebase.firestore();
+          const dbOrderRef = db.collection('orders');
+          dbOrderRef.add(this.state).then(() => {
+            toast.success('Order has been created successfully.', {
+                position: "bottom-left",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
         });
-    });
+          Swal.fire(`Your order has been Submited`);
+        }else{
+          Swal.fire(`Inserta El archivo Pdf`);
+        }
+      }else{
+        Swal.fire(`Inserta todos lo campos, busca a un usuario por ID por ejemplo aa33`);
+      }
+    }else{
+      Swal.fire(`Inserta todos lo campos, busca a un usuario por ID por ejemplo aa33`);
+    }
+    
+    
   }
 
   render(){
@@ -190,6 +208,7 @@ class Home extends React.Component{
             <h4>
               Amount: {this.state.orderamount}
             </h4>
+            <button onClick={this.Submit}>Mandar</button>
         </div>
       </main>
 
